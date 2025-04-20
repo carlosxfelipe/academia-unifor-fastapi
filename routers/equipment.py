@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 from models.equipment import GymEquipment
 from schemas.equipment import GymEquipmentSchema, GymEquipmentCreate, GymEquipmentUpdate
+from security.api_key import verify_key
 
 router = APIRouter(prefix="/equipment", tags=["Equipment"])
 
@@ -20,7 +21,11 @@ def list_equipment(db: Session = Depends(get_db)):
     return db.query(GymEquipment).all()
 
 
-@router.post("/", response_model=GymEquipmentSchema)
+@router.post(
+    "/",
+    response_model=GymEquipmentSchema,
+    dependencies=[Depends(verify_key)],
+)
 def create_equipment(equipment: GymEquipmentCreate, db: Session = Depends(get_db)):
     db_equipment = GymEquipment(**equipment.dict())
     db.add(db_equipment)
@@ -29,7 +34,11 @@ def create_equipment(equipment: GymEquipmentCreate, db: Session = Depends(get_db
     return db_equipment
 
 
-@router.put("/{equipment_id}", response_model=GymEquipmentSchema)
+@router.put(
+    "/{equipment_id}",
+    response_model=GymEquipmentSchema,
+    dependencies=[Depends(verify_key)],
+)
 def update_equipment(
     equipment_id: int, equipment: GymEquipmentUpdate, db: Session = Depends(get_db)
 ):
@@ -47,7 +56,11 @@ def update_equipment(
     return db_equipment
 
 
-@router.delete("/{equipment_id}", status_code=204)
+@router.delete(
+    "/{equipment_id}",
+    status_code=204,
+    dependencies=[Depends(verify_key)],
+)
 def delete_equipment(equipment_id: int, db: Session = Depends(get_db)):
     db_equipment = (
         db.query(GymEquipment).filter(GymEquipment.id == equipment_id).first()
