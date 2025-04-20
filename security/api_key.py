@@ -1,6 +1,10 @@
+import os
 from fastapi import Header, HTTPException
+from dotenv import load_dotenv
 
-API_KEY = "minha-chave-secreta"
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
 
 
 def verify_key(x_api_key: str = Header(...)):
