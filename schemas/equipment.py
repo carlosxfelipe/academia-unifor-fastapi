@@ -1,15 +1,27 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
-class GymEquipmentSchema(BaseModel):
-    id: int
+class GymEquipmentBase(BaseModel):
     category: str
     name: str
-    brand: str | None = None
-    model: str | None = None
-    quantity: int | None = 0
-    image: str | None = None
-    operational: bool = True
+    brand: Optional[str] = None
+    model: Optional[str] = None
+    quantity: Optional[int] = 0
+    image: Optional[str] = None
+    operational: Optional[bool] = True
+
+
+class GymEquipmentCreate(GymEquipmentBase):
+    pass
+
+
+class GymEquipmentUpdate(GymEquipmentBase):
+    pass
+
+
+class GymEquipmentSchema(GymEquipmentBase):
+    id: int
 
     class Config:
         orm_mode = True
