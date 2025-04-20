@@ -8,6 +8,7 @@ sqlite3 academia.db < sql/gym_equipment_schema.sql
 sqlite3 academia.db < sql/users_workouts_schema.sql
 
 python -m seed.seed_users
+python -m seed.seed_equipment
 
 uvicorn main:app --reload
 
