@@ -11,6 +11,12 @@ def load_equipment_from_json(file_path: str):
 
 def seed_equipment():
     db: Session = SessionLocal()
+
+    if db.query(GymEquipment).first():
+        print("ℹ️ Equipamentos já foram adicionados. Pulando inserção.")
+        db.close()
+        return
+
     data = load_equipment_from_json("seed/seed_equipment.json")
 
     for category in data.get("gymEquipment", []):
