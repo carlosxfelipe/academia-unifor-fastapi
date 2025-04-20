@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 from .workout import Workout, WorkoutCreate
 
+
 class UserBase(BaseModel):
     name: str
     email: str
@@ -11,9 +12,11 @@ class UserBase(BaseModel):
     avatarUrl: Optional[str] = None
     isAdmin: Optional[bool] = False
 
+
 class UserCreate(UserBase):
     password: str
     workouts: Optional[List[WorkoutCreate]] = []
+
 
 class User(UserBase):
     id: int
@@ -21,3 +24,8 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class UserLogin(BaseModel):
+    email: str
+    password: str

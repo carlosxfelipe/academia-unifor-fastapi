@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from database import Base, engine
-from routers import user, workout
+from routers import user, workout, auth, equipment
 
 Base.metadata.create_all(bind=engine)
 
@@ -10,5 +10,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(workout.router)
+app.include_router(equipment.router)
