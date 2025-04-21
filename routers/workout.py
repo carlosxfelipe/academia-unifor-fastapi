@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from schemas.workout import Workout
+from schemas.workout import WorkoutCreate
 from services import workout as workout_service
 from security.api_key import verify_key
 
@@ -33,3 +34,13 @@ def get_workout(workout_id: int, db: Session = Depends(get_db)):
 def delete_workout(workout_id: int, db: Session = Depends(get_db)):
     if not workout_service.delete_workout(db, workout_id):
         raise HTTPException(status_code=404, detail="Treino não encontrado")
+
+
+@router.put("/{workout_id}", response_model=Workout, dependencies=[Depends(verify_key)])
+def update_workout(
+    workout_id: int, updated_workout: WorkoutCreate, db: Session = Depends(get_db)
+):
+    db_workout = workout_service.update_workout(db, workout_id, updated_workout)
+    if not db_workout:
+        raise HTTPException(status_code=404, detail="Treino não encontrado")
+    return db_workout

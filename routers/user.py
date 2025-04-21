@@ -38,3 +38,11 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 def delete_user(user_id: int, db: Session = Depends(get_db)):
     if not user_service.delete_user(db, user_id):
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+
+@router.put("/{user_id}", response_model=User, dependencies=[Depends(verify_key)])
+def update_user(user_id: int, updated_user: UserCreate, db: Session = Depends(get_db)):
+    db_user = user_service.update_user(db, user_id, updated_user)
+    if not db_user:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    return db_user

@@ -4,11 +4,14 @@ from models.workout import Workout, Exercise
 from schemas.user import UserCreate
 from schemas.workout import WorkoutCreate, ExerciseCreate
 
+
 def get_users(db: Session):
     return db.query(User).all()
 
+
 def get_user(db: Session, user_id: int):
     return db.query(User).filter(User.id == user_id).first()
+
 
 def create_user(db: Session, user: UserCreate):
     db_user = User(
@@ -19,7 +22,7 @@ def create_user(db: Session, user: UserCreate):
         address=user.address,
         birthDate=user.birthDate,
         avatarUrl=user.avatarUrl,
-        isAdmin=1 if user.isAdmin else 0
+        isAdmin=1 if user.isAdmin else 0,
     )
     db.add(db_user)
     db.commit()
@@ -30,6 +33,7 @@ def create_user(db: Session, user: UserCreate):
 
     return db_user
 
+
 def delete_user(db: Session, user_id: int):
     db_user = get_user(db, user_id)
     if db_user:
@@ -38,11 +42,10 @@ def delete_user(db: Session, user_id: int):
         return True
     return False
 
+
 def create_workout(db: Session, workout: WorkoutCreate, user_id: int):
     db_workout = Workout(
-        name=workout.name,
-        description=workout.description,
-        user_id=user_id
+        name=workout.name, description=workout.description, user_id=user_id
     )
     db.add(db_workout)
     db.commit()
@@ -50,12 +53,28 @@ def create_workout(db: Session, workout: WorkoutCreate, user_id: int):
 
     for ex in workout.exercises:
         db_exercise = Exercise(
-            name=ex.name,
-            reps=ex.reps,
-            notes=ex.notes,
-            workout_id=db_workout.id
+            name=ex.name, reps=ex.reps, notes=ex.notes, workout_id=db_workout.id
         )
         db.add(db_exercise)
 
     db.commit()
     return db_workout
+
+
+def update_user(db: Session, user_id: int, user_data: UserCreate):
+    db_user = get_user(db, user_id)
+    if not db_user:
+        return None
+
+    db_user.name = user_data.name
+    db_user.email = user_data.email
+    db_user.password = user_data.password
+    db_user.phone = user_data.phone
+    db_user.address = user_data.address
+    db_user.birthDate = user_data.birthDate
+    db_user.avatarUrl = user_data.avatarUrl
+    db_user.isAdmin = 1 if user_data.isAdmin else 0
+
+    db.commit()
+    db.refresh(db_user)
+    return db_user
