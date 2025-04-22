@@ -8,7 +8,7 @@ __pycache__/
 *.pyo
 
 # Banco de dados SQLite
-# *.db
+*.db
 
 # Arquivos de sistema
 .DS_Store
