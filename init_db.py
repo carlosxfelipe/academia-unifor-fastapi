@@ -11,6 +11,8 @@ raw_path = os.getenv("DB_PATH", "sqlite:///./academia.db")
 parsed = urlparse(raw_path)
 db_path = parsed.path
 
+os.makedirs(os.path.dirname(db_path), exist_ok=True)
+
 if not os.path.exists(db_path):
     print("🔧 Criando o banco de dados e aplicando seeds...")
     Base.metadata.create_all(bind=engine)
