@@ -46,7 +46,7 @@
   {
     "id": 2,
     "name": "Igor Praciano Thomaz",
-    "email": "igor.praciano@unifor.com",
+    "email": "igor.praciano@edu.unifor.br",
     "password": "senha123",
     "phone": "85997766609",
     "address": "Fortaleza, CE",
@@ -111,7 +111,7 @@
   {
     "id": 3,
     "name": "Rafael Lima Cacau",
-    "email": "cacau.show@unifor.com",
+    "email": "cacau.show@edu.unifor.br",
     "password": "senha123",
     "phone": "85988194598",
     "address": "Fortaleza, CE",
@@ -123,7 +123,7 @@
   {
     "id": 4,
     "name": "Tiago Silveira Taumaturgo",
-    "email": "tiago.silveira@unifor.com",
+    "email": "tiago.silveira@edu.unifor.br",
     "password": "senha123",
     "phone": "85988292191",
     "address": "Fortaleza, CE",
@@ -160,6 +160,104 @@
           { "name": "Tríceps Testa", "reps": "4x12" },
           { "name": "Desenvolvimento Militar", "reps": "3x12" },
           { "name": "Abdominal Infra", "reps": "3x20" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Victor Arlino Duarte",
+    "email": "victorduarte@edu.unifor.br",
+    "password": "senha123",
+    "phone": "85994296001",
+    "address": "Fortaleza, CE",
+    "birthDate": "",
+    "avatarUrl": "",
+    "isAdmin": true,
+    "workouts": []
+  },
+  {
+    "id": 6,
+    "name": "Rafael Evaristo Menescal Barreira",
+    "email": "rafaelbarreira@edu.unifor.br",
+    "password": "senha123",
+    "phone": "85992131339",
+    "address": "Fortaleza, CE",
+    "birthDate": "",
+    "avatarUrl": "",
+    "isAdmin": true,
+    "workouts": []
+  },
+  {
+    "id": 7,
+    "name": "Raul Guimarães Sampaio",
+    "email": "raulsampaio@edu.unifor.br",
+    "password": "senha123",
+    "phone": "85988961019",
+    "address": "Fortaleza, CE",
+    "birthDate": "",
+    "avatarUrl": "",
+    "workouts": [
+      {
+        "name": "Treino A",
+        "description": "Peitoral, Costas, Pernas e Tríceps",
+        "exercises": [
+          {
+            "name": "Supino Reto com Halteres",
+            "reps": "4x10",
+            "notes": "Controle na descida, não estender totalmente os cotovelos"
+          },
+          {
+            "name": "Remada Baixa",
+            "reps": "4x12",
+            "notes": "Manter a postura e puxar até a linha do umbigo"
+          },
+          {
+            "name": "Agachamento no Smith",
+            "reps": "4x10",
+            "notes": "Descer devagar e manter os joelhos alinhados aos pés"
+          },
+          {
+            "name": "Tríceps Corda na Polia",
+            "reps": "3x15",
+            "notes": "Abrir bem no final do movimento"
+          },
+          {
+            "name": "Abdominal Oblíquo",
+            "reps": "3x20",
+            "notes": "Evitar puxar com as mãos"
+          }
+        ]
+      },
+      {
+        "name": "Treino B",
+        "description": "Ombros, Bíceps, Pernas e Cardio",
+        "exercises": [
+          {
+            "name": "Desenvolvimento com Halteres",
+            "reps": "4x12",
+            "notes": "Manter o tronco reto e controlar o peso"
+          },
+          {
+            "name": "Rosca Alternada",
+            "reps": "4x10",
+            "notes": "Evitar balanço do corpo"
+          },
+          {
+            "name": "Leg Press 45º",
+            "reps": "4x12",
+            "notes": "Não estender completamente os joelhos"
+          },
+          {
+            "name": "Flexora Sentado",
+            "reps": "3x15",
+            "notes": "Foco na contração dos posteriores"
+          },
+          {
+            "name": "Esteira",
+            "reps": "20 minutos",
+            "notes": "Caminhada acelerada ou corrida leve"
+          }
         ]
       }
     ]
