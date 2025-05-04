@@ -10,4 +10,4 @@ Key: API_KEY
 Value: G...
 
 Key: DB_PATH
-Value: sqlite:////data/academia.db
+Value: sqlite:///./academia.db

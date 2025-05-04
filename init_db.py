@@ -4,10 +4,9 @@ from seed.seed_users import seed_users
 from seed.seed_equipment import seed_equipment
 from urllib.parse import urlparse
 
-# Define e analisa o caminho do banco
 raw_path = os.getenv("DB_PATH", "sqlite:///./academia.db")
 parsed = urlparse(raw_path)
-db_path = parsed.path  # Isso retorna /data/academia.db no Render
+db_path = parsed.path
 
 try:
     print("🔧 Criando o banco de dados e aplicando seeds...")
