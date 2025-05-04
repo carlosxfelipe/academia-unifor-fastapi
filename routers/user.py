@@ -16,12 +16,12 @@ def get_db():
         db.close()
 
 
-@router.get("/", response_model=list[User])
+@router.get("/", response_model=list[User], dependencies=[Depends(verify_key)])
 def list_users(db: Session = Depends(get_db)):
     return user_service.get_users(db)
 
 
-@router.get("/{user_id}", response_model=User)
+@router.get("/{user_id}", response_model=User, dependencies=[Depends(verify_key)])
 def get_user(user_id: int, db: Session = Depends(get_db)):
     db_user = user_service.get_user(db, user_id)
     if not db_user:
