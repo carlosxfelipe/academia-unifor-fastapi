@@ -171,10 +171,98 @@
     "password": "senha123",
     "phone": "85994296001",
     "address": "Fortaleza, CE",
-    "birthDate": "",
-    "avatarUrl": "",
+    "birthDate": "22/10/2001",
+    "avatarUrl": "https://avatars.githubusercontent.com/u/101228066?v=4",
     "isAdmin": true,
-    "workouts": []
+    "workouts": [
+      {
+        "name": "Treino A",
+        "description": "Peitoral, Bíceps e Pernas",
+        "exercises": [
+          {
+            "name": "Supino Reto com Barra",
+            "reps": "4x10",
+            "notes": "Manter os pés firmes e escápulas estabilizadas"
+          },
+          {
+            "name": "Agachamento Livre",
+            "reps": "4x12",
+            "notes": "Descer até o paralelo e manter a postura"
+          },
+          {
+            "name": "Cadeira Extensora",
+            "reps": "4x10",
+            "notes": "Movimento controlado, sem trancar os joelhos"
+          },
+          {
+            "name": "Rosca Direta com Barra",
+            "reps": "4x12",
+            "notes": "Evitar balanço e manter o cotovelo fixo"
+          },
+          {
+            "name": "Abdominal Supra",
+            "reps": "3x20"
+          }
+        ]
+      },
+      {
+        "name": "Treino B",
+        "description": "Costas, Tríceps e Ombros",
+        "exercises": [
+          {
+            "name": "Puxada Frontal na Polia",
+            "reps": "4x12",
+            "notes": "Puxar até a linha do queixo, mantendo o tronco reto"
+          },
+          {
+            "name": "Tríceps Testa com Barra",
+            "reps": "3x12"
+          },
+          {
+            "name": "Desenvolvimento Militar com Halteres",
+            "reps": "4x10",
+            "notes": "Evitar estender totalmente os cotovelos"
+          },
+          {
+            "name": "Elevação Lateral",
+            "reps": "3x15"
+          },
+          {
+            "name": "Remada Curvada com Barra",
+            "reps": "4x12"
+          }
+        ]
+      },
+      {
+        "name": "Treino C",
+        "description": "Cardio e Core",
+        "exercises": [
+          {
+            "name": "Corrida na Esteira",
+            "reps": "25 minutos",
+            "notes": "Intensidade moderada"
+          },
+          {
+            "name": "Bike Ergométrica",
+            "reps": "20 minutos",
+            "notes": "Resistência média"
+          },
+          {
+            "name": "Prancha Abdominal",
+            "reps": "3x30s",
+            "notes": "Manter a lombar alinhada"
+          },
+          {
+            "name": "Abdominal Bicicleta",
+            "reps": "3x20"
+          },
+          {
+            "name": "Burpees",
+            "reps": "3x15"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 6,
