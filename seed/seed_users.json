@@ -271,8 +271,8 @@
     "password": "senha123",
     "phone": "85992131339",
     "address": "Fortaleza, CE",
-    "birthDate": "",
-    "avatarUrl": "",
+    "birthDate": "21/02/2001",
+    "avatarUrl": "https://i.ibb.co/8DZXyj5g/IMG-6250.jpg",
     "isAdmin": true,
     "workouts": []
   },
@@ -283,8 +283,8 @@
     "password": "senha123",
     "phone": "85988961019",
     "address": "Fortaleza, CE",
-    "birthDate": "",
-    "avatarUrl": "",
+    "birthDate": "22/11/1990",
+    "avatarUrl": "https://media.licdn.com/dms/image/v2/C4E03AQGY9IclTp9fFQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1621859500004?e=1752105600&v=beta&t=fbo7hmRD2JtKvNWLGhKF4BuEJRFQ7kWq4yj4pwzuolU",
     "workouts": [
       {
         "name": "Treino A",
