@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import Base, engine
-from routers import user, workout, auth, equipment
+from routers import user, workout, auth, equipment, gemini
 import init_db
 
 Base.metadata.create_all(bind=engine)
@@ -24,6 +24,7 @@ app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(workout.router)
 app.include_router(equipment.router)
+app.include_router(gemini.router)
 
 
 @app.get("/")

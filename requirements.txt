@@ -3,5 +3,6 @@ uvicorn
 sqlalchemy
 pydantic
 python-dotenv
+httpx
 
 
