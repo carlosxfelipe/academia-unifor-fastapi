@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Request, HTTPException
+from fastapi.responses import JSONResponse
 import os
 import httpx
+
 
 router = APIRouter(prefix="/gemini", tags=["Gemini"])
 
@@ -29,24 +31,27 @@ async def chat_with_gemini(request: Request):
         is_allowed_topic = any(topic in user_input for topic in ALLOWED_TOPICS)
 
         if not is_greeting and not is_allowed_topic:
-            return {
-                "candidates": [
-                    {
-                        "content": {
-                            "role": "model",
-                            "parts": [
-                                {
-                                    "text": (
-                                        "Desculpe, só posso responder perguntas relacionadas a musculação, "
-                                        "treinos, alimentação e nutrição."
-                                    )
-                                }
-                            ],
-                        },
-                        "finishReason": "STOP",
-                    }
-                ]
-            }
+            return JSONResponse(
+                content={
+                    "candidates": [
+                        {
+                            "content": {
+                                "role": "model",
+                                "parts": [
+                                    {
+                                        "text": (
+                                            "Desculpe, só posso responder perguntas relacionadas a musculação, "
+                                            "treinos, alimentação e nutrição."
+                                        )
+                                    }
+                                ],
+                            },
+                            "finishReason": "STOP",
+                        }
+                    ]
+                },
+                media_type="application/json; charset=utf-8",
+            )
 
         system_instruction = {
             "role": "user",
@@ -72,7 +77,9 @@ async def chat_with_gemini(request: Request):
             )
 
         response.raise_for_status()
-        return response.json()
+        return JSONResponse(
+            content=response.json(), media_type="application/json; charset=utf-8"
+        )
 
     except httpx.HTTPStatusError as http_error:
         raise HTTPException(
