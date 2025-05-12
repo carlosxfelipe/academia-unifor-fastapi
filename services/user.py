@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from models.user import User
 from models.workout import Workout, Exercise
-from schemas.user import UserCreate
+from schemas.user import UserCreate, UserUpdate
 from schemas.workout import WorkoutCreate, ExerciseCreate
 
 
@@ -61,19 +61,15 @@ def create_workout(db: Session, workout: WorkoutCreate, user_id: int):
     return db_workout
 
 
-def update_user(db: Session, user_id: int, user_data: UserCreate):
+def update_user(db: Session, user_id: int, user_data: UserUpdate):
     db_user = get_user(db, user_id)
     if not db_user:
         return None
 
-    db_user.name = user_data.name
-    db_user.email = user_data.email
-    db_user.password = user_data.password
-    db_user.phone = user_data.phone
-    db_user.address = user_data.address
-    db_user.birthDate = user_data.birthDate
-    db_user.avatarUrl = user_data.avatarUrl
-    db_user.isAdmin = 1 if user_data.isAdmin else 0
+    update_data = user_data.model_dump(exclude_unset=True)
+
+    for key, value in update_data.items():
+        setattr(db_user, key, value)
 
     db.commit()
     db.refresh(db_user)

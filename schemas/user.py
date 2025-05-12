@@ -29,3 +29,14 @@ class User(UserBase):
 class UserLogin(BaseModel):
     email: str
     password: str
+
+
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
+    birthDate: Optional[str] = None
+    avatarUrl: Optional[str] = None
+    isAdmin: Optional[bool] = None

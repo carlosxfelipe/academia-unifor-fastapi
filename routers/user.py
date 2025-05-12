@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal
-from schemas.user import User, UserCreate
+from schemas.user import User, UserCreate, UserUpdate
 from services import user as user_service
 from security.api_key import verify_key
 
@@ -41,7 +41,7 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{user_id}", response_model=User, dependencies=[Depends(verify_key)])
-def update_user(user_id: int, updated_user: UserCreate, db: Session = Depends(get_db)):
+def update_user(user_id: int, updated_user: UserUpdate, db: Session = Depends(get_db)):
     db_user = user_service.update_user(db, user_id, updated_user)
     if not db_user:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
