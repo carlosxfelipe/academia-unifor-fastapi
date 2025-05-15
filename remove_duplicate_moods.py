@@ -1,37 +1,36 @@
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from models.mood import MoodLog
-from datetime import datetime
+from collections import defaultdict
 
 
-def round_to_minute(dt):
-    return dt.replace(second=0, microsecond=0)
-
-
-def remove_exact_duplicates():
+def remove_exact_duplicates_keep_one():
     db: Session = SessionLocal()
-    all_moods = db.query(MoodLog).order_by(MoodLog.timestamp).all()
 
-    seen = set()
+    # Agrupar por (mood, timestamp exato)
+    duplicates_map = defaultdict(list)
+    all_logs = db.query(MoodLog).order_by(MoodLog.timestamp).all()
+
+    for log in all_logs:
+        key = (log.mood, log.timestamp)
+        duplicates_map[key].append(log)
+
     to_delete = []
 
-    for mood in all_moods:
-        rounded_time = round_to_minute(mood.timestamp)
-        key = (mood.mood, rounded_time)
+    for entries in duplicates_map.values():
+        if len(entries) > 1:
+            # Mantém o primeiro, remove os demais
+            to_delete.extend(entries[1:])
 
-        if key in seen:
-            to_delete.append(mood)
-        else:
-            seen.add(key)
+    print(f"🔍 {len(to_delete)} duplicatas exatas encontradas para exclusão.")
 
-    print(f"🔍 {len(to_delete)} registros duplicados detectados.")
-    for mood in to_delete:
-        db.delete(mood)
+    for log in to_delete:
+        db.delete(log)
 
     db.commit()
     db.close()
-    print("✅ Registros duplicados removidos com sucesso.")
+    print("✅ Duplicatas removidas com sucesso. Um exemplar de cada foi mantido.")
 
 
 if __name__ == "__main__":
-    remove_exact_duplicates()
+    remove_exact_duplicates_keep_one()
