@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from models import user, workout, equipment, mood
 from database import Base, engine
 from routers import user, workout, auth, equipment, gemini, mood
-import init_db
 
 Base.metadata.create_all(bind=engine)
 
