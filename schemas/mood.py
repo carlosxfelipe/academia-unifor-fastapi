@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from enum import Enum
+from datetime import datetime
 
 
 class MoodEnum(str, Enum):
@@ -12,3 +13,12 @@ class MoodEnum(str, Enum):
 
 class MoodEntry(BaseModel):
     mood: MoodEnum
+
+
+class MoodLogResponse(BaseModel):
+    id: int
+    mood: MoodEnum
+    timestamp: datetime
+
+    class Config:
+        orm_mode = True

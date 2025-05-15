@@ -2,8 +2,9 @@ from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal
-from schemas.mood import MoodEntry
+from schemas.mood import MoodEntry, MoodLogResponse
 from models.mood import MoodLog
+from typing import List
 
 router = APIRouter(prefix="/mood", tags=["Mood"])
 
@@ -37,3 +38,8 @@ def log_mood(entry: MoodEntry, db: Session = Depends(get_db)):
     db.add(mood_log)
     db.commit()
     return {"message": f"Mood '{entry.mood}' registrado com sucesso!"}
+
+
+@router.get("/", response_model=List[MoodLogResponse])
+def get_all_moods(db: Session = Depends(get_db)):
+    return db.query(MoodLog).order_by(MoodLog.timestamp.desc()).all()
