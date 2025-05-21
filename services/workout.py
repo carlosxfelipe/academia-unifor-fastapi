@@ -43,3 +43,21 @@ def update_workout(db: Session, workout_id: int, workout_data: WorkoutCreate):
     db.commit()
     db.refresh(workout)
     return workout
+
+
+def create_workout(db: Session, workout: WorkoutCreate, user_id: int):
+    db_workout = Workout(
+        name=workout.name, description=workout.description, user_id=user_id
+    )
+    db.add(db_workout)
+    db.commit()
+    db.refresh(db_workout)
+
+    for ex in workout.exercises:
+        db_exercise = Exercise(
+            name=ex.name, reps=ex.reps, notes=ex.notes, workout_id=db_workout.id
+        )
+        db.add(db_exercise)
+
+    db.commit()
+    return db_workout
