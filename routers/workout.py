@@ -46,8 +46,18 @@ def update_workout(
     return db_workout
 
 
-@router.post("/", response_model=Workout, dependencies=[Depends(verify_key)])
-def create_workout(
+# @router.post("/", response_model=Workout, dependencies=[Depends(verify_key)])
+# def create_workout(
+#     user_id: int, workout_data: WorkoutCreate, db: Session = Depends(get_db)
+# ):
+#     db_workout = workout_service.create_workout(db, workout_data, user_id)
+#     return db_workout
+
+
+@router.post(
+    "/user/{user_id}", response_model=Workout, dependencies=[Depends(verify_key)]
+)
+def create_workout_for_user(
     user_id: int, workout_data: WorkoutCreate, db: Session = Depends(get_db)
 ):
     db_workout = workout_service.create_workout(db, workout_data, user_id)
